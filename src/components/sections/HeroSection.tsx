@@ -17,7 +17,7 @@ const HeroSection = ({
   subtitle = "Boost your e-commerce performance with our suite of AI tools designed specifically for Shopify store owners.",
   primaryCTA = "Get Started",
   secondaryCTA = "Learn More",
-  logoSrc = "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=400&q=80",
+  logoSrc = "/ezshopperlogo.png",
   logoAlt = "EzShopper Logo",
 }: HeroSectionProps) => {
   // Animation variants for staggered animations

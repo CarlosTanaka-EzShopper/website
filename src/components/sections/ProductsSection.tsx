@@ -1,5 +1,7 @@
 import React from "react";
 import ProductCard from "../ProductCard";
+import { Button } from "../ui/button";
+import { useNavigate } from "react-router-dom";
 
 interface Product {
   title: string;
@@ -8,6 +10,7 @@ interface Product {
   color: string;
   ctaText: string;
   isComingSoon?: boolean;
+  iconName?: string;
 }
 
 interface ProductsSectionProps {
@@ -17,13 +20,13 @@ interface ProductsSectionProps {
 }
 
 const ProductsSection = ({
-  title = "Our AI Solutions",
-  subtitle = "Cutting-edge tools that help you grow your Shopify store and maximize profits.",
+  title = "Discover the EzShopper Suite",
+  subtitle = "Three AI-powered solutions that work individually or together to elevate your e-commerce business. Use them standalone, or combine all three for best results – the choice is yours.",
   products = [
     {
       title: "AI Shopping Assistant",
       description:
-        "Personalized shopping experiences that convert. Our AI assistant guides customers through your store, increasing engagement and sales.",
+        "An intelligent shopping concierge for your website. The AI Shopping Assistant engages your visitors with chat and personalized product recommendations, providing instant answers and tailored suggestions. Result: happier customers and higher conversion rates.",
       features: [
         "24/7 Customer Support",
         "Product Recommendations",
@@ -32,11 +35,12 @@ const ProductsSection = ({
       color: "#ed2a7b",
       ctaText: "Learn More",
       isComingSoon: false,
+      iconName: "shopping-assistant",
     },
     {
       title: "AI Pricing",
       description:
-        "Dynamic pricing strategies that maximize your profit margins. Our AI analyzes market trends and competitor pricing in real-time.",
+        "A dynamic pricing engine that keeps your prices optimal. AI Pricing analyzes market trends, competitor prices, and your own sales data to automatically adjust prices for maximized profits and competitiveness. Result: improved margins and sales growth without constant manual repricing.",
       features: [
         "Competitive Analysis",
         "Demand-based Pricing",
@@ -45,22 +49,25 @@ const ProductsSection = ({
       color: "#f7b135",
       ctaText: "Coming Soon",
       isComingSoon: true,
+      iconName: "pricing",
     },
     {
       title: "AI Inventory",
       description:
-        "Smart inventory management that prevents stockouts and overstock situations. Predict demand and optimize your supply chain.",
+        "A smart inventory forecasting system for your store. AI Inventory monitors sales patterns and seasonal trends to predict stock needs, sending restock alerts and optimizing inventory levels. Result: fewer stockouts and overstocks, and smoother operations.",
       features: [
         "Demand Forecasting",
         "Automatic Reordering",
         "Seasonal Trend Analysis",
       ],
       color: "#6228d5",
-      ctaText: "Coming Soon",
-      isComingSoon: true,
+      ctaText: "Learn More",
+      isComingSoon: false,
+      iconName: "inventory",
     },
   ],
 }: ProductsSectionProps) => {
+  const navigate = useNavigate();
   return (
     <section id="products" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -81,15 +88,29 @@ const ProductsSection = ({
               accentColor={product.color}
               ctaText={product.ctaText}
               isComingSoon={product.isComingSoon}
+              iconName={product.iconName}
               onCtaClick={() => {
-                if (!product.isComingSoon) {
-                  window.location.href = `/${product.title
-                    .toLowerCase()
-                    .replace(/\s+/g, "-")}`;
+                // Allow navigation to AI Inventory page even if marked as coming soon
+                if (!product.isComingSoon || product.title === "AI Inventory") {
+                  navigate(
+                    `/${product.title.toLowerCase().replace(/\s+/g, "-")}`,
+                  );
                 }
               }}
             />
           ))}
+        </div>
+
+        <div className="mt-16 text-center">
+          <p className="text-lg mb-4">
+            Not sure which solution fits your needs?
+          </p>
+          <Button
+            onClick={() => navigate("/contact")}
+            className="px-6 py-2 text-white bg-primary hover:bg-primary/90"
+          >
+            Talk to our team
+          </Button>
         </div>
       </div>
     </section>

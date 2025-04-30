@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, MessageSquare, Tag, Package } from "lucide-react";
 import { Button } from "./ui/button";
 import {
   Card,
@@ -18,6 +18,7 @@ interface ProductCardProps {
   accentColor: string;
   ctaText: string;
   icon?: React.ReactNode;
+  iconName?: string;
   isComingSoon?: boolean;
   onCtaClick?: () => void;
 }
@@ -29,6 +30,7 @@ const ProductCard = ({
   accentColor = "#ed2a7b",
   ctaText = "Learn More",
   icon,
+  iconName = "",
   isComingSoon = false,
   onCtaClick = () => {},
 }: ProductCardProps) => {
@@ -61,11 +63,19 @@ const ProductCard = ({
                   className="w-8 h-8 rounded-full flex items-center justify-center overflow-hidden"
                   style={{ backgroundColor: accentColor }}
                 >
-                  <img
-                    src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=50&q=80"
-                    alt="AI Icon"
-                    className="w-full h-full object-cover"
-                  />
+                  {iconName === "shopping-assistant" ? (
+                    <MessageSquare className="w-5 h-5 text-white" />
+                  ) : iconName === "pricing" ? (
+                    <Tag className="w-5 h-5 text-white" />
+                  ) : iconName === "inventory" ? (
+                    <Package className="w-5 h-5 text-white" />
+                  ) : (
+                    <img
+                      src="/ezshoppericon.png"
+                      alt="AI Icon"
+                      className="w-full h-full object-cover"
+                    />
+                  )}
                 </div>
               )}
             </div>

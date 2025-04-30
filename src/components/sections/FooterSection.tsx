@@ -8,7 +8,7 @@ interface FooterSectionProps {
 }
 
 const FooterSection = ({
-  logoSrc = "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=200&q=80",
+  logoSrc = "/ezshopperlogo.png",
   logoAlt = "EzShopper Logo",
   companyName = "EzShopper Technologies Inc.",
   tagline = "AI-powered solutions for Shopify store owners.",
